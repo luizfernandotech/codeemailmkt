@@ -1,9 +1,9 @@
 <?php
 
-namespace AppTest\Action;
+namespace CodeEmailMKTTest\Action;
 
-use App\Action\HomePageAction;
-use App\Action\HomePageFactory;
+use CodeEmailMKT\Action\HomePageAction;
+use CodeEmailMKT\Action\HomePageFactory;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -12,14 +12,6 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ContainerInterface */
     protected $container;
-
-    protected function setUp()
-    {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $router = $this->prophesize(RouterInterface::class);
-
-        $this->container->get(RouterInterface::class)->willReturn($router);
-    }
 
     public function testFactoryWithoutTemplate()
     {
@@ -46,5 +38,13 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
         $homePage = $factory($this->container->reveal());
 
         $this->assertTrue($homePage instanceof HomePageAction);
+    }
+
+    protected function setUp()
+    {
+        $this->container = $this->prophesize(ContainerInterface::class);
+        $router = $this->prophesize(RouterInterface::class);
+
+        $this->container->get(RouterInterface::class)->willReturn($router);
     }
 }

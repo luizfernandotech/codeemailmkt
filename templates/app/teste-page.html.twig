@@ -2,4 +2,19 @@
 {% block title %}Teste{% endblock %}
 {% block content %}
     {{ data }}
+    {% do minhaClasse.setName("Luiz") %}
+    {{ minhaClasse.name }}
+    <br><br>
+    {% for client in clients %}
+        CLIENTE {{ loop.index }}:<br>
+        - Nome: {{ client.name }}<br>
+        - CPF: {{ client.cpf }}<br>
+        - Email: {{ client.email }}<br>
+        - ENDERECO(s):<br>
+        {% for address in client.getAddresses %}
+            -- {{ address.logradouro }}, {{ address.cidade }}/{{ address.estado }} - CEP: {{ address.cep }}<br>
+        {% endfor %}
+        <hr>
+    {% endfor %}
 {% endblock %}
+
